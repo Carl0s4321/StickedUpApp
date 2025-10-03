@@ -1,0 +1,109 @@
+[gd_scene load_steps=10 format=3 uid="uid://bq43ce32jfocs"]
+
+[ext_resource type="Script" uid="uid://clkwbphtrrcel" path="res://scenes/Characters/enemy.gd" id="1_7e252"]
+[ext_resource type="Texture2D" uid="uid://bvyvpr0qkp17h" path="res://assets/sprites/character/man_idleFront.png" id="1_uxjc3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fqvgg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7e252"]
+atlas = ExtResource("1_uxjc3")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_howb4"]
+atlas = ExtResource("1_uxjc3")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gm3hw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7e252")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_howb4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_7e252"]
+resource_name = "hurt"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(10, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StaticBody2D/AnimatedSprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.757557, 0, 0.10687, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_howb4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StaticBody2D/AnimatedSprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0c8la"]
+_data = {
+&"RESET": SubResource("Animation_howb4"),
+&"hurt": SubResource("Animation_7e252")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_7e252")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-14, 0)
+scale = Vector2(-1.98411, 3.76423)
+shape = SubResource("CapsuleShape2D_fqvgg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="StaticBody2D"]
+sprite_frames = SubResource("SpriteFrames_gm3hw")
+autoplay = "default"
+speed_scale = 0.3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0c8la")
+}

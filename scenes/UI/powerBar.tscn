@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://c40vet6meupyx"]
+
+[ext_resource type="Texture2D" uid="uid://d4g5m61my6e7n" path="res://assets/sprites/UI/96x32/Progressbar_Base.png" id="1_5ve67"]
+[ext_resource type="Texture2D" uid="uid://d3jdq0c5xx1ff" path="res://assets/sprites/UI/96x32/Progressbar.png" id="2_eermu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lclnl"]
+atlas = ExtResource("2_eermu")
+region = Rect2(0, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_820dp"]
+atlas = ExtResource("2_eermu")
+region = Rect2(96, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ac6h2"]
+atlas = ExtResource("2_eermu")
+region = Rect2(192, 0, 96, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8a4cg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lclnl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_820dp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ac6h2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TextureProgressBar" type="TextureProgressBar"]
+offset_right = 96.0
+offset_bottom = 24.0
+size_flags_horizontal = 0
+value = 100.0
+texture_progress = ExtResource("1_5ve67")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 6.0
+offset_right = 57.0
+offset_bottom = 29.0
+scale = Vector2(0.465422, 0.465422)
+text = "10/10"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(50, 16)
+sprite_frames = SubResource("SpriteFrames_8a4cg")
+autoplay = "default"
+frame_progress = 0.445496

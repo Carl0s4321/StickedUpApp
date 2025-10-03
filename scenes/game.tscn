@@ -1,0 +1,92 @@
+[gd_scene load_steps=10 format=3 uid="uid://6n7iymwramjb"]
+
+[ext_resource type="Script" uid="uid://c4dc8umvo7fn1" path="res://scenes/game.gd" id="1_iywne"]
+[ext_resource type="Texture2D" uid="uid://bbing1d4jsw8a" path="res://assets/background/field.png" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://o2n2ejg8mpnr" path="res://scenes/Characters/Player.tscn" id="2_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://df23die828q02" path="res://scenes/UI/healthBar.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://ycjmaxiju4nk" path="res://scenes/UI/Ability.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://bq43ce32jfocs" path="res://scenes/Characters/Enemy.tscn" id="4_u5sy4"]
+[ext_resource type="Script" uid="uid://g2xwbd2jkeri" path="res://scenes/UI/health_bar.gd" id="5_p57ef"]
+[ext_resource type="PackedScene" uid="uid://sqqprqhu81ew" path="res://scenes/UI/Timer.tscn" id="8_gee14"]
+[ext_resource type="PackedScene" uid="uid://htfav4knswh" path="res://scenes/UI/Overlay/Overlay.tscn" id="9_0tnpc"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_iywne")
+
+[node name="Field" type="Sprite2D" parent="."]
+position = Vector2(178, 319)
+scale = Vector2(0.370467, 0.339714)
+texture = ExtResource("1_uwrxv")
+metadata/_edit_lock_ = true
+
+[node name="player" parent="." instance=ExtResource("2_lbhrr")]
+position = Vector2(122, 416)
+scale = Vector2(2.40539, 2.38569)
+
+[node name="enemy" parent="." instance=ExtResource("4_u5sy4")]
+position = Vector2(236, 238)
+scale = Vector2(1.71843, 1.71843)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerHealthbar" parent="CanvasLayer/Control" instance=ExtResource("2_yqjtg")]
+layout_mode = 1
+offset_left = 108.0
+offset_top = 413.0
+offset_right = 108.0
+offset_bottom = 413.0
+scale = Vector2(2.0612, 2.0612)
+script = ExtResource("5_p57ef")
+metadata/_edit_use_anchors_ = true
+
+[node name="enemyHealthbar" parent="CanvasLayer/Control" instance=ExtResource("2_yqjtg")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.125
+anchor_top = -1.2
+anchor_right = 0.875
+anchor_bottom = -0.2
+offset_left = -3.0
+offset_top = 141.0
+offset_right = -3.0
+offset_bottom = 141.0
+scale = Vector2(2.0612, 2.0612)
+script = ExtResource("5_p57ef")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ability" parent="CanvasLayer/Control" instance=ExtResource("3_lnu2h")]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.45
+anchor_bottom = 1.45
+offset_left = 118.0
+offset_top = 510.0
+offset_right = 118.0
+offset_bottom = 510.0
+scale = Vector2(2.33844, 1.96683)
+metadata/_edit_use_anchors_ = true
+
+[node name="Timer" parent="CanvasLayer/Control" instance=ExtResource("8_gee14")]
+layout_mode = 1
+offset_left = 286.0
+offset_top = 1.0
+offset_right = 286.0
+offset_bottom = 1.0
+
+[node name="Overlay" parent="CanvasLayer/Control" instance=ExtResource("9_0tnpc")]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = 244.0
+offset_right = 40.0
+offset_bottom = 244.0
+scale = Vector2(4.08326, 4.06444)
+size_flags_vertical = 8

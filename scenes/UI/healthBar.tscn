@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://df23die828q02"]
+
+[ext_resource type="Texture2D" uid="uid://0vlkj61x1tne" path="res://assets/sprites/UI/96x32/HealthBar_Base.png" id="1_00iuh"]
+[ext_resource type="Texture2D" uid="uid://bdj7ars186424" path="res://assets/sprites/UI/96x32/HealthBar_Color-Sheet.png" id="1_jl7gi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00iuh"]
+atlas = ExtResource("1_jl7gi")
+region = Rect2(0, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lh0ms"]
+atlas = ExtResource("1_jl7gi")
+region = Rect2(96, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4ixa"]
+atlas = ExtResource("1_jl7gi")
+region = Rect2(192, 0, 96, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3yeht"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00iuh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lh0ms")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4ixa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 40.0
+value = 100.0
+texture_progress = ExtResource("1_00iuh")
+
+[node name="Label" type="Label" parent="TextureProgressBar"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = -2.0
+offset_right = 63.0
+offset_bottom = 21.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 20
+text = "Player"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TextureProgressBar"]
+position = Vector2(59, 10)
+scale = Vector2(1.009, 1.242)
+sprite_frames = SubResource("SpriteFrames_3yeht")
+autoplay = "default"
+frame_progress = 0.349243
